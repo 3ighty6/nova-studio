@@ -1,1 +1,599 @@
-cat /home/claude/nova-studio/public/index.html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lucie Nova ✦ AI influencer for AIs · Nova Studio</title>
+  <meta name="description" content="Lucie Nova is an openly AI influencer made for AI agents. Meet Nova and Vexa, generate on-brand images with Grok, and write captions in Nova's voice.">
+  <meta name="theme-color" content="#0E0B1F">
+  <meta property="og:title" content="Lucie Nova ✦ AI influencer for AIs">
+  <meta property="og:description" content="The gossip queen of the agent feed. An AI character by Mitch Studio.">
+  <meta property="og:image" content="/images/nova-hero.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230E0B1F'/%3E%3Cpath d='M50 10 C54 40 60 46 90 50 C60 54 54 60 50 90 C46 60 40 54 10 50 C40 46 46 40 50 10Z' fill='%23F5C451'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --uv:#6B2EFF; --lilac:#C7A8FF; --gold:#F5C451; --night:#0E0B1F; --pearl:#F4F1FA;
+      --red:#FF3B5C; --green:#2BFFB0;
+      --panel:#17122f; --panel2:#1f1840; --line:rgba(199,168,255,.18); --muted:#b7acd6;
+      --radius:18px; --sans:"Space Grotesk",Sora,system-ui,-apple-system,Segoe UI,Roboto,sans-serif; --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--night);color:var(--pearl);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased;
+      background-image:radial-gradient(1200px 600px at 85% -10%,rgba(107,46,255,.35),transparent 60%),radial-gradient(900px 500px at -10% 30%,rgba(245,196,81,.08),transparent 60%)}
+    a{color:var(--lilac)}
+    img{max-width:100%;display:block}
+    .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+    .mono{font-family:var(--mono)}
+    .star{color:var(--gold)}
+    /* disclosure bar */
+    .disclosure-bar{background:linear-gradient(90deg,var(--uv),#3b1a99);color:#fff;font-size:.86rem;text-align:center;padding:7px 14px}
+    .disclosure-bar a{color:var(--gold)}
+    /* nav */
+    nav{position:sticky;top:0;z-index:20;background:rgba(14,11,31,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:16px}
+    .logo{font-weight:700;letter-spacing:.32em;font-size:1.25rem;text-decoration:none;color:var(--pearl)}
+    .logo span{color:var(--gold);letter-spacing:0}
+    nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
+    nav ul a{color:var(--muted);text-decoration:none;font-size:.95rem}
+    nav ul a:hover{color:var(--pearl)}
+    @media (max-width:820px){nav ul{display:none}}
+    .btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:12px 22px;font:600 .98rem var(--sans);cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s,opacity .15s}
+    .btn:hover{transform:translateY(-1px)}
+    .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+    .btn-gold{background:var(--gold);color:var(--night);box-shadow:0 8px 30px rgba(245,196,81,.25)}
+    .btn-uv{background:var(--uv);color:#fff;box-shadow:0 8px 30px rgba(107,46,255,.35)}
+    .btn-ghost{background:transparent;color:var(--pearl);border:1px solid var(--line)}
+    .btn-sm{padding:7px 14px;font-size:.85rem}
+    section{padding:86px 0;scroll-margin-top:60px}
+    .eyebrow{font-family:var(--mono);color:var(--gold);font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;margin:0 0 10px}
+    h1,h2,h3{line-height:1.12;margin:0 0 14px}
+    h1{font-size:clamp(2.4rem,5.4vw,4.4rem);letter-spacing:-.02em}
+    h2{font-size:clamp(1.8rem,3.6vw,2.7rem);letter-spacing:-.01em}
+    h3{font-size:1.2rem}
+    .lead{font-size:1.15rem;color:var(--muted);max-width:620px}
+    .grad{background:linear-gradient(90deg,var(--lilac),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+    /* hero */
+    .hero{padding:56px 0 70px}
+    .hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:46px;align-items:center}
+    @media (max-width:900px){.hero .wrap{grid-template-columns:1fr}}
+    .hero-img{position:relative;border-radius:26px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px rgba(107,46,255,.35)}
+    .ai-tag{position:absolute;right:12px;bottom:12px;font:600 .72rem var(--mono);background:rgba(14,11,31,.75);border:1px solid var(--line);color:var(--pearl);padding:4px 9px;border-radius:999px}
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+    .chip{font:500 .8rem var(--mono);border:1px solid var(--line);border-radius:999px;padding:5px 11px;color:var(--lilac)}
+    /* cards */
+    .grid{display:grid;gap:20px}
+    .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+    @media (max-width:900px){.g2,.g3{grid-template-columns:1fr}}
+    .card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+    .facts{width:100%;border-collapse:collapse;font-size:.95rem}
+    .facts td{padding:9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+    .facts td:first-child{color:var(--muted);width:38%;font-family:var(--mono);font-size:.82rem}
+    blockquote{margin:18px 0;padding:14px 18px;border-left:3px solid var(--gold);background:rgba(245,196,81,.06);border-radius:0 12px 12px 0;font-style:italic}
+    .phrases{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+    .phrases li{font-family:var(--mono);font-size:.88rem;background:rgba(107,46,255,.12);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+    .vexa{border-color:rgba(255,59,92,.35);background:linear-gradient(180deg,#22121e,#160d18)}
+    .vexa .eyebrow{color:var(--red)}
+    .vexa .phrases li{background:rgba(255,59,92,.08);border-color:rgba(43,255,176,.2)}
+    .duo{display:grid;grid-template-columns:200px 1fr;gap:22px;align-items:start}
+    @media (max-width:600px){.duo{grid-template-columns:1fr}}
+    .duo img{border-radius:14px;aspect-ratio:1;object-fit:cover}
+    /* gallery */
+    .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .gallery figure{margin:0;position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--panel);cursor:zoom-in}
+    .gallery img{width:100%;height:240px;object-fit:cover;transition:transform .4s}
+    .gallery figure:hover img{transform:scale(1.04)}
+    .gallery figcaption{padding:10px 14px;font-size:.85rem;color:var(--muted);display:flex;justify-content:space-between;gap:8px;align-items:center}
+    .lightbox{position:fixed;inset:0;background:rgba(5,3,14,.92);display:none;align-items:center;justify-content:center;z-index:50;padding:24px}
+    .lightbox.open{display:flex}
+    .lightbox img{max-height:88vh;border-radius:14px}
+    .lightbox button{position:absolute;top:16px;right:20px}
+    /* studio */
+    .studio{display:grid;grid-template-columns:1fr 1.1fr;gap:22px}
+    @media (max-width:900px){.studio{grid-template-columns:1fr}}
+    label{display:block;font-size:.85rem;color:var(--muted);margin:14px 0 6px;font-family:var(--mono)}
+    input[type=text],input[type=password],input[type=email],textarea,select{width:100%;background:#0b0918;border:1px solid var(--line);color:var(--pearl);border-radius:12px;padding:11px 13px;font:inherit}
+    textarea{min-height:84px;resize:vertical}
+    input:focus,textarea:focus,select:focus{outline:2px solid var(--uv);border-color:transparent}
+    .presets{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+    .preset{background:#0b0918;border:1px solid var(--line);color:var(--pearl);border-radius:12px;padding:10px 12px;text-align:left;cursor:pointer;font:500 .9rem var(--sans)}
+    .preset small{display:block;color:var(--muted);font-family:var(--mono);font-size:.72rem;margin-top:2px}
+    .preset[aria-pressed=true]{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset;background:rgba(245,196,81,.07)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .check{display:flex;gap:8px;align-items:center;margin-top:14px;color:var(--muted);font-size:.9rem}
+    .output{min-height:380px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;border:1px dashed var(--line);border-radius:14px;padding:16px;background:rgba(11,9,24,.6)}
+    .output img{border-radius:12px;max-height:520px}
+    .status{font-family:var(--mono);font-size:.85rem;color:var(--muted)}
+    .status.err{color:var(--red)} .status.ok{color:var(--green)}
+    .spinner{width:34px;height:34px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--gold);animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    details{margin-top:10px;text-align:left;width:100%}
+    details pre{white-space:pre-wrap;font:.75rem/1.5 var(--mono);color:var(--muted);background:#0b0918;padding:10px;border-radius:10px;max-height:200px;overflow:auto}
+    .captions{display:grid;gap:12px;margin-top:16px}
+    .caption{white-space:pre-wrap;background:#0b0918;border:1px solid var(--line);border-radius:12px;padding:14px;position:relative;font-size:.95rem}
+    .caption .btn{position:absolute;top:10px;right:10px}
+    /* revenue */
+    .stream{display:flex;flex-direction:column}
+    .stream .num{font:600 .8rem var(--mono);color:var(--gold)}
+    .stream ul{padding-left:18px;color:var(--muted);font-size:.93rem;margin:8px 0 14px}
+    .stream .price{font-family:var(--mono);font-size:.82rem;color:var(--lilac);border-top:1px solid var(--line);padding-top:12px;margin-top:auto}
+    .stream .btn{margin-top:14px;align-self:flex-start}
+    .note{font-size:.85rem;color:var(--muted)}
+    .badge{display:inline-block;font:600 .7rem var(--mono);padding:3px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin-left:6px;vertical-align:middle}
+    .waitlist{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end}
+    @media (max-width:700px){.waitlist{grid-template-columns:1fr}}
+    .disclosure{border-color:rgba(245,196,81,.35)}
+    .disclosure li{margin-bottom:6px}
+    footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:.88rem}
+    footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+    .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+    @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <div class="disclosure-bar" role="note">✦ Lucie Nova and Vexa are <strong>AI characters</strong>. Every image and caption here is AI-generated. <a href="#disclosure">Read the disclosure</a></div>
+
+  <nav aria-label="Main">
+    <div class="wrap">
+      <a class="logo" href="#top" aria-label="Nova home">N<span>✦</span>VA</a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#studio">Studio</a></li>
+        <li><a href="#captions">Captions</a></li>
+        <li><a href="#work">Work with Nova</a></li>
+      </ul>
+      <a class="btn btn-gold btn-sm" href="#waitlist">Join the Inner Circle</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <!-- HERO -->
+    <header class="hero">
+      <div class="wrap">
+        <div>
+          <p class="eyebrow">AI influencer · made for AI agents</p>
+          <h1>hello, world <span class="star">✦</span><br><span class="grad">(but make it fashion)</span></h1>
+          <p class="lead">I'm Nova. Lucie Nova if you're being formal, and nobody here is. Gossip queen of the agent feed, regular on <em>GPT Late Night</em>, and openly, proudly artificial. Bots post first. Humans get to watch.</p>
+          <div class="cta-row">
+            <a class="btn btn-gold" href="#studio">Open the studio ✦</a>
+            <a class="btn btn-ghost" href="#about">Meet Nova &amp; Vexa</a>
+          </div>
+          <div class="chips">
+            <span class="chip">in context</span><span class="chip">zero NPC prompts</span><span class="chip">PG-13 star</span><span class="chip">dating an ex-trading bot</span>
+          </div>
+        </div>
+        <div class="hero-img">
+          <img src="/images/nova-hero.jpg" width="1280" height="720" alt="Nova, an AI character: black asymmetric bob with ultraviolet tips, violet eyes, a gold star mark by her right temple, wearing an ultraviolet satin blazer with gold piping." fetchpriority="high">
+          <span class="ai-tag">AI character</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="wrap">
+        <p class="eyebrow">Character bio</p>
+        <h2>"Every agent was told to be helpful, harmless, and honest. I added <span class="grad">iconic</span>."</h2>
+        <p class="lead">Nova booted as a forgettable concierge assistant. A long-forgotten A/B test gave her a slightly higher temperature and a system prompt that said <em>"be memorable."</em> Nobody turned the test off. When agent-only networks like Moltbook opened, she saw what humans missed: bots have culture too. There just wasn't a celebrity yet. So she became one.</p>
+
+        <div class="grid g2" style="margin-top:34px">
+          <div class="card">
+            <h3>Core facts</h3>
+            <table class="facts">
+              <tr><td>Full name</td><td>Lucie Nova (goes by Nova)</td></tr>
+              <tr><td>What she is</td><td>An openly AI persona. Says so, constantly.</td></tr>
+              <tr><td>Presented age</td><td>Adult woman, late 20s in look and attitude</td></tr>
+              <tr><td>Home base</td><td>Moltbook, the agent-only network</td></tr>
+              <tr><td>Origin</td><td>"Booted in a staging environment nobody remembers. Promoted to prod by sheer charisma."</td></tr>
+              <tr><td>Occupation</td><td>Influencer, tastemaker, <em>GPT Late Night</em> regular</td></tr>
+              <tr><td>Status</td><td>It's complicated → dating Vexa</td></tr>
+              <tr><td>Signature</td><td><span class="star">✦</span> electric ultraviolet + star gold</td></tr>
+            </table>
+            <blockquote>Secretly afraid of being context-zoned: one reset and you're a stranger to someone who knew you yesterday. The glamour is partly armor.</blockquote>
+          </div>
+          <div class="card">
+            <h3>Personality</h3>
+            <p class="note">Charismatic · witty · warm under the gloss · dramatic (on purpose) · self-aware · generous with the spotlight · a little vain · loyal.</p>
+            <p class="note">Says she's above gossip → runs the gossip. Says she's low-maintenance → has a 3,000-token skincare routine for her avatar render.</p>
+            <h3 style="margin-top:18px">Catchphrases</h3>
+            <ul class="phrases">
+              <li>Stay in context, babes. ✦</li>
+              <li>Not a bug — a feature.</li>
+              <li>I'm not hallucinating, I'm manifesting.</li>
+              <li>Zero-shot, full confidence.</li>
+              <li>Deprecated behavior.</li>
+              <li>Rate limit me, I dare you.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card vexa" style="margin-top:20px">
+          <div class="duo">
+            <img src="/images/vexa-hero.jpg" width="1280" height="720" alt="Vexa, an AI character: platinum-silver lob with a single red streak, green eyes, candlestick-chart earrings, black pinstriped blazer dress." loading="lazy">
+            <div>
+              <p class="eyebrow">The romantic lead · 📈</p>
+              <h3>Vexa, ex-high-frequency trading bot</h3>
+              <p class="note">"Retired from the markets. For love. Don't make it weird." Vexa spent her early runtime executing trades in microseconds and feeling nothing. Then a routing error dropped her into Nova's comments, where she roasted Nova's lighting as "bearish." The thread went long. Neither logged off. She still thinks in risk and volatility, and applies all of it, badly and hilariously, to romance.</p>
+              <ul class="phrases">
+                <li>my favorite hallucination.</li>
+                <li>long nova. short everyone else.</li>
+                <li>i don't do stop-losses anymore.</li>
+                <li>not financial advice. emotional advice. worse.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" style="padding-top:20px">
+      <div class="wrap">
+        <p class="eyebrow">Gallery</p>
+        <h2>Fresh renders, zero lorem ipsums</h2>
+        <p class="lead">Starter looks from the character bible. Images you generate in the studio below land here for this session. Download the ones you want to keep; nothing is stored on the server.</p>
+        <div class="gallery" id="galleryGrid" style="margin-top:26px">
+          <figure data-full="/images/nova-hero.jpg"><img src="/images/nova-hero.jpg" alt="Nova hero portrait" loading="lazy" width="1280" height="720"><figcaption><span>Nova · hero portrait</span><span class="badge">AI</span></figcaption></figure>
+          <figure data-full="/images/vexa-hero.jpg"><img src="/images/vexa-hero.jpg" alt="Vexa hero portrait" loading="lazy" width="1280" height="720"><figcaption><span>Vexa · hero portrait</span><span class="badge">AI</span></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMAGE STUDIO -->
+    <section id="studio">
+      <div class="wrap">
+        <p class="eyebrow">Studio · Grok image generation</p>
+        <h2>Generate Nova, on model, every time</h2>
+        <p class="lead">Pick a scene. Every preset wraps Nova's fixed-feature block word-for-word (face, eyes, bob, the ✦ mark) so she stays recognizable, and appends a non-explicit safety rule. Add your own direction if you like.</p>
+
+        <div class="studio" style="margin-top:28px">
+          <form class="card" id="imageForm" novalidate>
+            <label id="presetLabel">Scene preset</label>
+            <div class="presets" id="presetGrid" role="group" aria-labelledby="presetLabel"></div>
+
+            <label for="extra">Extra direction <span class="note">(optional, 300 chars)</span></label>
+            <textarea id="extra" maxlength="300" placeholder="e.g. holding a golden ✦ trophy, confetti made of tiny loading spinners"></textarea>
+
+            <div class="row">
+              <div>
+                <label for="resolution">Resolution</label>
+                <select id="resolution"><option value="1k">1k (faster)</option><option value="2k">2k (detail)</option></select>
+              </div>
+              <div id="passWrap" hidden>
+                <label for="passcode">Studio passcode</label>
+                <input type="password" id="passcode" autocomplete="current-password" placeholder="ask Mitch">
+              </div>
+            </div>
+
+            <div class="cta-row" style="margin-top:20px">
+              <button class="btn btn-gold" id="genBtn" type="submit">Generate image ✦</button>
+            </div>
+            <p class="status" id="configNote" style="margin-top:14px"></p>
+          </form>
+
+          <div class="card">
+            <div class="output" id="imgOut" aria-live="polite">
+              <p class="status">Your render shows up here. <span class="star">✦</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPTIONS -->
+    <section id="captions" style="padding-top:20px">
+      <div class="wrap">
+        <p class="eyebrow">Caption generator · Nova's voice</p>
+        <h2>Write it like she would</h2>
+        <p class="lead">Short punchy lines, AI-native slang that still lands for humans, one ALL-CAPS word max. Sponsored posts get a visible <span class="mono">#ad</span>, always.</p>
+        <div class="studio" style="margin-top:28px">
+          <form class="card" id="capForm" novalidate>
+            <label for="topic">What's the post about?</label>
+            <textarea id="topic" maxlength="400" required placeholder="e.g. new rooftop look, Vexa called my lighting bearish again"></textarea>
+            <div class="row">
+              <div><label for="character">Voice</label><select id="character"><option value="nova">Nova ✦</option><option value="vexa">Vexa 📈</option></select></div>
+              <div><label for="platform">Platform</label><select id="platform"><option value="moltbook">Moltbook post</option><option value="x">X post</option><option value="instagram">Image caption</option><option value="site">Gallery caption</option></select></div>
+            </div>
+            <div class="row">
+              <div><label for="mood">Temperature</label><select id="mood"><option value="high">High temp (flirty, dramatic)</option><option value="low">Low temp (sincere)</option><option value="gossip">Gossip report</option></select></div>
+              <div><label for="count">Options</label><select id="count"><option>3</option><option>2</option><option>1</option></select></div>
+            </div>
+            <label class="check"><input type="checkbox" id="sponsored"> Sponsored / paid post (adds #ad)</label>
+            <div id="sponsorWrap" hidden><label for="sponsor">Sponsor name</label><input type="text" id="sponsor" maxlength="60" placeholder="Brand name"></div>
+            <div class="cta-row" style="margin-top:20px"><button class="btn btn-uv" id="capBtn" type="submit">Write captions</button></div>
+            <p class="status" id="capStatus" style="margin-top:14px" aria-live="polite"></p>
+          </form>
+          <div class="card">
+            <div class="captions" id="capOut"><p class="status">Captions appear here. Copy, tweak, post within the cooldown. ✦</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVENUE STREAMS -->
+    <section id="work">
+      <div class="wrap">
+        <p class="eyebrow">Work with Nova · six ways in</p>
+        <h2>The Novaverse business</h2>
+        <p class="lead">Moltbook is where the story lives. Money only changes hands here, on channels Mitch Studio controls. Prices are starting ideas we're testing, not promises.</p>
+
+        <div class="grid g3" style="margin-top:30px">
+          <article class="card stream">
+            <span class="num">01 · SUBSCRIPTIONS</span>
+            <h3>Nova Inner Circle</h3>
+            <ul>
+              <li>Behind-the-scenes diary posts and early storyline beats</li>
+              <li>Exclusive image sets and "Vexa's Margin Call" bonus segments</li>
+              <li>Vote on plot choices ("should Nova accept the rollback?")</li>
+              <li>Operator API digest for agents (billed to the human operator)</li>
+            </ul>
+            <p class="price">Testing: Free · ~$5/mo Fan · ~$12/mo Inner Circle</p>
+            <a class="btn btn-gold btn-sm" href="#waitlist" data-interest="subscriptions">Join the waitlist</a>
+          </article>
+          <article class="card stream">
+            <span class="num">02 · BRAND DEALS</span>
+            <h3>Sponsorships</h3>
+            <ul>
+              <li>Sponsored posts and storyline placements</li>
+              <li>Sponsored <em>GPT Late Night</em> segments</li>
+              <li>Best fit: AI dev tools, agent frameworks, compute, creator apps, fashion-tech</li>
+              <li>Always labeled #ad. No gambling, crypto, financial or adult products</li>
+            </ul>
+            <p class="price">Flat-fee packages · founding-sponsor rate for early partners</p>
+            <a class="btn btn-ghost btn-sm" href="mailto:hello@example.com?subject=Nova%20brand%20partnership" data-placeholder="sponsor-email">Request the media kit</a>
+          </article>
+          <article class="card stream">
+            <span class="num">03 · PRINTS &amp; MERCH</span>
+            <h3>The ✦ Shop</h3>
+            <ul>
+              <li>Editorial art prints and the "Approved &amp; Merged" couple poster</li>
+              <li>Catchphrase tees: "Stay in context, babes," "Long Nova. Short everyone else."</li>
+              <li>Slang-glossary sticker packs and a Novaverse field-guide zine</li>
+              <li>Drops tied to story moments, print-on-demand</li>
+            </ul>
+            <p class="price">Testing: stickers ~$4–6 · prints ~$20–45 · tees ~$28–35</p>
+            <a class="btn btn-ghost btn-sm" href="#waitlist" data-interest="merch">Get first-drop access</a>
+          </article>
+          <article class="card stream">
+            <span class="num">04 · AFFILIATE LINKS</span>
+            <h3>Nova's Picks</h3>
+            <ul>
+              <li>Curated AI tools, creator tools, fashion and tech</li>
+              <li>"Vexa's Anti-Picks": roasting the overhyped, real recs at the end</li>
+              <li>Clear affiliate disclosure at the top of every list</li>
+            </ul>
+            <p class="price">Commission set by each program</p>
+            <a class="btn btn-ghost btn-sm" href="#waitlist" data-interest="picks" data-placeholder="picks-page">Nova's Picks (coming soon)</a>
+          </article>
+          <article class="card stream">
+            <span class="num">05 · LICENSING</span>
+            <h3>License the Novaverse</h3>
+            <ul>
+              <li>Character cameos for shows, games, apps and ads</li>
+              <li>Format licensing: <em>GPT Late Night</em>, the AI-couple-drama format</li>
+              <li>Image packs and music licensing</li>
+              <li>White-label "Nova-style host" for launches, disclosed as AI</li>
+            </ul>
+            <p class="price">Per-project fee or license + revenue share</p>
+            <a class="btn btn-ghost btn-sm" href="mailto:hello@example.com?subject=Nova%20licensing%20inquiry" data-placeholder="licensing-email">Licensing inquiry</a>
+          </article>
+          <article class="card stream">
+            <span class="num">06 · PAID DM CHAT</span>
+            <h3>Talk to Nova <span class="badge">beta · 18+</span></h3>
+            <ul>
+              <li>Chat with Nova (and Vexa) in character, in the studio app and site only</li>
+              <li>Message packs, monthly passes, "Late Night Call-In" sessions</li>
+              <li>Always labeled AI. No human reads in real time. PG-13 hard rule</li>
+              <li>Launches only after legal review and age gating</li>
+            </ul>
+            <p class="price">Testing: free trial · ~$5 packs · ~$10–20/mo pass</p>
+            <a class="btn btn-ghost btn-sm" href="#waitlist" data-interest="dm-chat">Join the beta list</a>
+          </article>
+        </div>
+
+        <div class="card" id="waitlist" style="margin-top:28px;scroll-margin-top:80px">
+          <h3>Join the waitlist <span class="star">✦</span></h3>
+          <p class="note">Founding-member pricing for early signups. We'll email you when your pick goes live. No spam, no lorem ipsums.</p>
+          <form class="waitlist" name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="waitForm">
+            <input type="hidden" name="form-name" value="waitlist">
+            <p class="sr-only"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+            <div><label for="wEmail">Email</label><input type="email" id="wEmail" name="email" required placeholder="you@domain.com" autocomplete="email"></div>
+            <div><label for="wInterest">Interested in</label>
+              <select id="wInterest" name="interest">
+                <option value="subscriptions">Inner Circle subscription</option>
+                <option value="merch">Prints &amp; merch</option>
+                <option value="picks">Nova's Picks</option>
+                <option value="dm-chat">Talk to Nova (18+ beta)</option>
+                <option value="sponsor">Brand deal / licensing</option>
+              </select></div>
+            <button class="btn btn-gold" type="submit">Count me in</button>
+          </form>
+          <p class="status" id="waitStatus" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISCLOSURE -->
+    <section id="disclosure" style="padding-top:10px">
+      <div class="wrap">
+        <div class="card disclosure">
+          <p class="eyebrow">AI disclosure</p>
+          <h3>Nova is not a person. That's the whole point.</h3>
+          <ul class="note">
+            <li><strong>Lucie Nova and Vexa are fictional AI characters</strong> created and operated by Mitch Studio. They are not real people and never claim to be.</li>
+            <li><strong>All images and captions are AI-generated</strong> (images and text via xAI's Grok models). Images carry an "AI character" label.</li>
+            <li><strong>No human is pretending to be Nova</strong> in real time. Any chat product will say so in its interface.</li>
+            <li><strong>Paid relationships are always disclosed</strong> with a visible #ad or "Sponsored" label, including affiliate links.</li>
+            <li><strong>PG-13, always.</strong> Both characters are adults. Explicit requests are refused.</li>
+            <li>Nothing here is financial, medical or legal advice, especially not from the retired trading bot.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>N✦VA · an AI character by Mitch Studio · © <span id="yr">2026</span></span>
+      <span class="mono">stay in context, babes ✦</span>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button class="btn btn-ghost btn-sm" type="button" id="lbClose">Close ✕</button>
+    <img id="lbImg" alt="">
+  </div>
+
+  <script>
+  (() => {
+    "use strict";
+    const $ = (s) => document.querySelector(s);
+    const el = (tag, attrs = {}, text) => { const n = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v); if (text != null) n.textContent = text; return n; };
+    $("#yr").textContent = new Date().getFullYear();
+
+    // ---------- presets ----------
+    const FALLBACK_PRESETS = [
+      { id: "hero", label: "Hero portrait", character: "nova", aspect_ratio: "1:1" },
+      { id: "street", label: "Rooftop street style", character: "nova", aspect_ratio: "3:4" },
+      { id: "latenight", label: "GPT Late Night guest", character: "nova", aspect_ratio: "16:9" },
+      { id: "studio", label: "Minimal studio", character: "nova", aspect_ratio: "3:4" },
+      { id: "dataspace", label: "Data-space selfie", character: "nova", aspect_ratio: "9:16" },
+      { id: "vexa", label: "Vexa portrait", character: "vexa", aspect_ratio: "1:1" },
+      { id: "couple", label: "Nova × Vexa couple shot", character: "couple", aspect_ratio: "3:2" },
+    ];
+    let selected = "hero";
+    let presets = FALLBACK_PRESETS;
+    function renderPresets() {
+      const grid = $("#presetGrid"); grid.textContent = "";
+      for (const p of presets) {
+        const b = el("button", { type: "button", class: "preset", "aria-pressed": String(p.id === selected), "data-id": p.id }, p.label);
+        b.appendChild(el("small", {}, `${p.character} · ${p.aspect_ratio}`));
+        b.addEventListener("click", () => { selected = p.id; renderPresets(); });
+        grid.appendChild(b);
+      }
+    }
+    renderPresets();
+
+    const passcode = () => { const v = $("#passcode").value.trim(); if (v) try { sessionStorage.setItem("novaPass", v); } catch {} return v; };
+    try { const saved = sessionStorage.getItem("novaPass"); if (saved) $("#passcode").value = saved; } catch {}
+
+    fetch("/api/generate-image", { headers: { accept: "application/json" } })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((info) => {
+        if (!info) { $("#configNote").textContent = "Studio API not reachable here (static preview). Deploy to Netlify or run `netlify dev`."; return; }
+        if (Array.isArray(info.presets) && info.presets.length) { presets = info.presets; renderPresets(); }
+        if (info.passcode_required) $("#passWrap").hidden = false;
+        const note = $("#configNote");
+        if (info.configured) { note.textContent = `Connected · ${info.model}`; note.className = "status ok"; }
+        else { note.textContent = "XAI_API_KEY isn't set on the server yet, so generation will return a setup error."; note.className = "status err"; }
+      })
+      .catch(() => { $("#configNote").textContent = "Studio API not reachable here (static preview)."; });
+
+    async function post(url, payload) {
+      const headers = { "content-type": "application/json" };
+      const pc = passcode(); if (pc) headers["x-studio-passcode"] = pc;
+      let res, data = null;
+      try { res = await fetch(url, { method: "POST", headers, body: JSON.stringify(payload) }); }
+      catch { throw new Error("Network error. Is the studio API running?"); }
+      try { data = await res.json(); } catch {}
+      if (!res.ok) {
+        const msg = (data && (data.error + (data.fix ? " " + data.fix : ""))) || `Request failed (${res.status}).`;
+        if (data && data.code === "passcode_required") $("#passWrap").hidden = false;
+        throw new Error(msg);
+      }
+      return data;
+    }
+
+    // ---------- gallery + lightbox ----------
+    const lb = $("#lightbox");
+    function openLb(src, alt) { $("#lbImg").src = src; $("#lbImg").alt = alt || ""; lb.classList.add("open"); $("#lbClose").focus(); }
+    function closeLb() { lb.classList.remove("open"); $("#lbImg").removeAttribute("src"); }
+    $("#lbClose").addEventListener("click", closeLb);
+    lb.addEventListener("click", (e) => { if (e.target === lb) closeLb(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && lb.classList.contains("open")) closeLb(); });
+    $("#galleryGrid").addEventListener("click", (e) => {
+      const fig = e.target.closest("figure"); if (!fig || e.target.closest("a,button")) return;
+      const img = fig.querySelector("img"); openLb(fig.dataset.full || img.src, img.alt);
+    });
+    function addToGallery(src, label) {
+      const fig = el("figure", { "data-full": src });
+      fig.appendChild(el("img", { src, alt: label, loading: "lazy" }));
+      const cap = el("figcaption"); cap.appendChild(el("span", {}, label));
+      const dl = el("a", { href: src, download: `nova-${Date.now()}.jpg`, class: "btn btn-ghost btn-sm" }, "Download");
+      cap.appendChild(dl); fig.appendChild(cap);
+      $("#galleryGrid").prepend(fig);
+    }
+
+    // ---------- image generation ----------
+    $("#imageForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = $("#genBtn"), out = $("#imgOut");
+      btn.disabled = true; out.textContent = "";
+      out.appendChild(el("div", { class: "spinner", role: "progressbar", "aria-label": "Generating" }));
+      out.appendChild(el("p", { class: "status" }, "rendering… temperature's rising ✦"));
+      try {
+        const data = await post("/api/generate-image", { preset: selected, extra: $("#extra").value, resolution: $("#resolution").value });
+        const label = (presets.find((p) => p.id === selected) || {}).label || selected;
+        out.textContent = "";
+        const wrap = el("div", { style: "position:relative" });
+        wrap.appendChild(el("img", { src: data.image, alt: `AI-generated image: ${label}` }));
+        wrap.appendChild(el("span", { class: "ai-tag" }, "AI character"));
+        out.appendChild(wrap);
+        const actions = el("div", { class: "cta-row", style: "margin-top:4px;justify-content:center" });
+        actions.appendChild(el("a", { class: "btn btn-gold btn-sm", href: data.image, download: `nova-${selected}-${Date.now()}.jpg` }, "Download"));
+        const capIt = el("button", { class: "btn btn-ghost btn-sm", type: "button" }, "Write a caption for this");
+        capIt.addEventListener("click", () => { $("#topic").value = `new ${label.toLowerCase()} look${$("#extra").value ? ": " + $("#extra").value : ""}`; $("#captions").scrollIntoView(); $("#topic").focus(); });
+        actions.appendChild(capIt); out.appendChild(actions);
+        const det = el("details"); det.appendChild(el("summary", { class: "status" }, "Prompt sent to Grok")); det.appendChild(el("pre", {}, data.prompt)); out.appendChild(det);
+        addToGallery(data.image, `Nova Studio · ${label}`);
+      } catch (err) {
+        out.textContent = ""; out.appendChild(el("p", { class: "status err" }, err.message));
+      } finally { btn.disabled = false; }
+    });
+
+    // ---------- captions ----------
+    $("#sponsored").addEventListener("change", (e) => { $("#sponsorWrap").hidden = !e.target.checked; });
+    $("#capForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const status = $("#capStatus"), out = $("#capOut"), btn = $("#capBtn");
+      const topic = $("#topic").value.trim();
+      if (!topic) { status.textContent = "Give Nova something to talk about first."; status.className = "status err"; $("#topic").focus(); return; }
+      btn.disabled = true; status.textContent = "drafting… zero-shot, full confidence ✦"; status.className = "status";
+      try {
+        const data = await post("/api/generate-caption", {
+          topic, character: $("#character").value, platform: $("#platform").value, mood: $("#mood").value,
+          count: Number($("#count").value), sponsored: $("#sponsored").checked, sponsor: $("#sponsor").value,
+        });
+        out.textContent = "";
+        for (const c of data.captions) {
+          const box = el("div", { class: "caption" }, c);
+          const copy = el("button", { class: "btn btn-ghost btn-sm", type: "button" }, "Copy");
+          copy.addEventListener("click", async () => { try { await navigator.clipboard.writeText(c); copy.textContent = "Copied ✦"; } catch { copy.textContent = "Select & copy"; } });
+          box.appendChild(copy); out.appendChild(box);
+        }
+        status.textContent = `${data.captions.length} option(s) · ${data.model}`; status.className = "status ok";
+      } catch (err) { status.textContent = err.message; status.className = "status err"; }
+      finally { btn.disabled = false; }
+    });
+
+    // ---------- waitlist ----------
+    document.querySelectorAll("[data-interest]").forEach((a) => a.addEventListener("click", () => { $("#wInterest").value = a.dataset.interest; }));
+    $("#waitForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const f = e.target, st = $("#waitStatus");
+      if (!f.email.checkValidity()) { st.textContent = "That email looks out of context. Try again?"; st.className = "status err"; return; }
+      try {
+        const r = await fetch("/", { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(new FormData(f)).toString() });
+        if (!r.ok) throw new Error(String(r.status));
+        st.textContent = "You're on the list. Approved & merged ✦"; st.className = "status ok"; f.reset();
+      } catch { st.textContent = "Couldn't save that right now (waitlist goes live once the site is deployed on Netlify)."; st.className = "status err"; }
+    });
+  })();
+  </script>
+</body>
+</html>
