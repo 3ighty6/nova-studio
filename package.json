@@ -1,0 +1,16 @@
+{
+  "name": "nova-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lucie Nova studio: character page, on-demand Grok image generation and in-voice captions (Netlify).",
+  "type": "module",
+  "scripts": {
+    "dev": "netlify dev",
+    "test": "node --import tsx --test tests/*.test.mts"
+  },
+  "devDependencies": {
+    "@netlify/functions": "^2.8.2",
+    "tsx": "^4.19.0"
+  },
+  "engines": { "node": ">=18.18" }
+}
